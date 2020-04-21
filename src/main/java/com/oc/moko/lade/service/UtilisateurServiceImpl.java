@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.oc.moko.lade.dao.UtilisateurDao;
 import com.oc.moko.lade.entity.Utilisateur;
 
 @Service
