@@ -13,7 +13,7 @@ public class WebAppInitializerConfig extends AbstractAnnotationConfigDispatcherS
     @Override
     protected Class <?> [] getServletConfigClasses() {
         return new Class[] {
-            AppConfig.class
+            WebMvcConfig.class
         };
     }
 
