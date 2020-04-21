@@ -40,6 +40,13 @@
             <artifactId>spring-orm</artifactId>
     		<version>5.2.5.RELEASE</version>
         </dependency>
+        
+        <!-- Hibernate EntityManager -->
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-entitymanager</artifactId>
+		    <version>5.4.14.Final</version>
+		</dependency>
 		
         <!-- Hibernate Validator -->
         <dependency>
