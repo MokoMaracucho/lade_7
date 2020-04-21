@@ -11,3 +11,5 @@ Tutos :
     Cours : https://www.javaguides.net/2018/10/spring-mvc-jsp-form-tags-tutorial.html
 4 - Spring MVC 5 Form Validation with Annotations Tutorial
     Cours : https://www.javaguides.net/2018/10/spring-mvc-form-validation-with-annotations-tutorial.html
+5 - Spring MVC 5 + Hibernate 5 + JSP + MySQL CRUD Tutorial
+    Cours : https://www.javaguides.net/2018/11/spring-mvc-5-hibernate-5-jsp-mysql-crud-tutorial.html
