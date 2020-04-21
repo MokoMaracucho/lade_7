@@ -11,7 +11,7 @@ import com.oc.moko.lade.model.FormulaireInscription;
 @Controller
 public class InscriptionController {
 
-    @ModelAttribute("signUpForm")
+    @ModelAttribute("formulaireInscription")
     public FormulaireInscription formulaireInscription() {
         return new FormulaireInscription();
     }
@@ -21,7 +21,7 @@ public class InscriptionController {
         return "inscription_utilisateur";
     }
 
-    @PostMapping("/resultat_inscription")
+    @PostMapping("/resultat_inscription_utilisateur")
     public String saveUser(@ModelAttribute("formulaireInscription") FormulaireInscription formulaireInscription, Model model) {
 
         // Implement business logic to save user details into a database
@@ -34,8 +34,8 @@ public class InscriptionController {
         System.out.println("Confirmation mot-de-passe : "	+ formulaireInscription.getConfirmationMotDePasseUtilisateur());
 
         model.addAttribute("message", "Utilisateur enregistré avec succés.");
-        model.addAttribute("formulaireInscription", formulaireInscription);
+        model.addAttribute("nouvelUtilisateur", formulaireInscription);
 
-        return "resultat_inscription";
+        return "resultat_inscription_utilisateur";
     }
 }
