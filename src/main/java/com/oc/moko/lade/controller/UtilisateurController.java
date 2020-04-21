@@ -33,17 +33,17 @@ public class UtilisateurController {
         return "inscription_utilisateur";
     }
 
+    @PostMapping("/enregistrer_utilisateur")
+    public String enregistrerUtilisateur(@ModelAttribute("utilisateur") Utilisateur utilisateur) {
+    	utilisateurService.enregistrerUtilisateur(utilisateur);
+        return "redirect:/utilisateur/liste_utilisateurs";
+    }
+
     @GetMapping("/liste_utilisateurs")
     public String listeUtilisateurs(Model model) {
         List<Utilisateur> listeUtilisateurs = utilisateurService.listeUtilisateurs();
         model.addAttribute("listeUtilisateurs", listeUtilisateurs);
         return "liste_utilisateurs";
-    }
-
-    @PostMapping("/enregistrer_utilisateur")
-    public String enregistrerUtilisateur(@ModelAttribute("utilisateur") Utilisateur utilisateur) {
-    	utilisateurService.enregistrerUtilisateur(utilisateur);
-        return "redirect:/utilisateur/liste_utilisateurs";
     }
 
     @GetMapping("/maj_utilisateur")
