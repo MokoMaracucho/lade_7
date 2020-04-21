@@ -1,4 +1,4 @@
-package com.oc.moko.lade.model;
+package com.oc.moko.lade.entity;
 
 public enum Privilege {
 	

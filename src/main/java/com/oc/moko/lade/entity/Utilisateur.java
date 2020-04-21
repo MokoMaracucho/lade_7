@@ -1,56 +1,64 @@
-package com.oc.moko.lade.model;
+package com.oc.moko.lade.entity;
 
 import java.sql.Timestamp;
 import java.util.UUID;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name="tb_utilisateur")
 public class Utilisateur {
 	
-//	@Id
-//	@NotNull
-//	@GeneratedValue(generator="UUID")
-//	@GenericGenerator(name="UUID", strategy="org.hibernate.id.UUIDGenerator")
-//	@Column(name= "id_utilisateur", updatable=false)
+	@Id
+	@NotNull
+	@GeneratedValue(generator="UUID")
+	@GenericGenerator(name="UUID", strategy="org.hibernate.id.UUIDGenerator")
+	@Column(name="id_utilisateur", updatable=false)
 	private UUID idUtilisateur;
 	
 //    @Min(value = 1, message = "Veuillez saisir un prénom valide.")
 //    @Max(value = 30, message = "Veuillez saisir un prénom valide.")
-//	@NotNull
-//	@Column(name="prenom_utilisateur")
+	@NotNull
+	@Column(name="prenom_utilisateur")
 	private String prenomUtilisateur;
 	
 //    @Min(value = 1, message = "Veuillez saisir un nom valide.")
 //    @Max(value = 30, message = "Veuillez saisir un nom valide.")
-//	@NotNull
-//	@Column(name="nom_utilisateur", length=30)
+	@NotNull
+	@Column(name="nom_utilisateur", length=30)
 	private String nomUtilisateur;
 	
 //    @Email(message="Veuillez saisir un email valide.")
-//	@NotNull
-//	@Column(name="email_utilisateur", length=30, unique=true)
+	@NotNull
+	@Column(name="email_utilisateur", length=30, unique=true)
 	private String emailUtilisateur;
 	
 //	@Pattern(regexp = "^[a-zA-Z0-9]{5}", message = "only 5 chars/digits")
-//	@NotNull
-//	@Column(name="mot_de_passe_utilisateur", length=30)
+	@NotNull
+	@Column(name="mot_de_passe_utilisateur", length=30)
 	private String motDePasseUtilisateur;
 	
-//	@NotNull
-//	@Transient
+	@NotNull
+	@Transient
     private String confirmationMotDePasseUtilisateur;
 
-//	@NotNull
-//	@Enumerated(EnumType.STRING)
-//	@Column(name="privilege_utilisateur", length=30)
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(name="privilege_utilisateur", length=30)
 	private Privilege privilegeUtilisateur;
 	
-//	@NotNull
-//	@Column(name="date_inscription_utilisateur")
+	@NotNull
+	@Column(name="date_inscription_utilisateur")
 	private Timestamp dateInscriptionUtilisateur;
 	
 	public Utilisateur() {
