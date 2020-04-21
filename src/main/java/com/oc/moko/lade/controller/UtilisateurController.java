@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.oc.moko.lade.entity.Utilisateur;
+import com.oc.moko.lade.service.UtilisateurService;
 
 @Controller
 @RequestMapping("/utilisateur")
