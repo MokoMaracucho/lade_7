@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.oc.moko.lade.model.FormulaireInscription;
 import com.oc.moko.lade.model.Utilisateur;
 
 @Controller
@@ -40,6 +41,12 @@ public class UtilisateurController {
 
     @RequestMapping("/traitement_inscription_utilisateur")
     public String traitementFormulaireInscription(@Valid @ModelAttribute("utilisateur") Utilisateur utilisateur, BindingResult bindingResult) {
+
+        System.out.println("Prénom : " 						+ utilisateur.getPrenomUtilisateur());
+        System.out.println("Nom : " 						+ utilisateur.getNomUtilisateur());
+        System.out.println("Email : " 						+ utilisateur.getEmailUtilisateur());
+        System.out.println("Mot-de-passe : " 				+ utilisateur.getMotDePasseUtilisateur());
+        System.out.println("Confirmation mot-de-passe : "	+ utilisateur.getConfirmationMotDePasseUtilisateur());
 
         if (bindingResult.hasErrors()) {
         	
