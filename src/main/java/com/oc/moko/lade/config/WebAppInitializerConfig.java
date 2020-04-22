@@ -7,7 +7,7 @@ public class WebAppInitializerConfig extends AbstractAnnotationConfigDispatcherS
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
         return new Class[] {
-            PersistenceJPAConfig.class
+            PersistenceJpaConfig.class
         };
 	}
 
