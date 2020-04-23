@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@PropertySource({"classpath:/com/oc/moko/lade/config/database.properties"})
+@PropertySource({"classpath:database.properties"})
 @ComponentScan({"com.oc.moko.lade"})
 @EnableJpaRepositories(basePackages="com.oc.moko.lade.repository")
 public class PersistenceJpaConfig {

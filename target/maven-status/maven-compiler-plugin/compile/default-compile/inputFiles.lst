@@ -7,4 +7,6 @@
 /Users/moko/spring-workspace/lade/src/main/java/com/oc/moko/lade/controller/UtilisateurController.java
 /Users/moko/spring-workspace/lade/src/main/java/com/oc/moko/lade/service/UtilisateurService.java
 /Users/moko/spring-workspace/lade/src/main/java/com/oc/moko/lade/config/PersistenceJpaConfig.java
+/Users/moko/spring-workspace/lade/src/main/java/com/oc/moko/lade/exception/FormException.java
 /Users/moko/spring-workspace/lade/src/main/java/com/oc/moko/lade/entity/Utilisateur.java
+/Users/moko/spring-workspace/lade/src/main/java/com/oc/moko/lade/form/TraitementFormulaireInscription.java

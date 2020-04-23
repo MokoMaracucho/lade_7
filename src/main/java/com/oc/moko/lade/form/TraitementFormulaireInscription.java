@@ -14,7 +14,6 @@ import com.oc.moko.lade.service.UtilisateurService;
 
 public class TraitementFormulaireInscription {
 
-    @Autowired
     private UtilisateurService utilisateurService;
 	
 	public static final String CHAMP_PRENOM_UTILISATEUR 						= "prenomUtilisateur";
@@ -101,7 +100,7 @@ public class TraitementFormulaireInscription {
 	private void validationEmail(String emailUtilisateur) throws FormException {
         if (emailUtilisateur != null && emailUtilisateur.trim().length() != 0) {
             if (emailUtilisateur.matches("^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")) {
-            	if (utilisateurService.selectionnerUtilisateurParEmail(emailUtilisateur)) {
+            	if (utilisateurService.selectionnerUtilisateurParEmail(emailUtilisateur) != null) {
                     throw new FormException("Cette adresse email est déjà utilisée.");
                 }
             } else {
@@ -116,7 +115,7 @@ public class TraitementFormulaireInscription {
 		try {
 			validationMotDePasse(motDePasseUtilisateur, confirmationMotDePasseUtilisateur);
 		} catch(FormException e) {
-			erreursInscriptionUtilisateur.put(CHAMP_EMAIL_UTILISATEUR, e.getMessage());
+			erreursInscriptionUtilisateur.put(CHAMP_MOT_DE_PASSE_UTILISATEUR, e.getMessage());
 		}
 		ConfigurablePasswordEncryptor passwordEncryptor = new ConfigurablePasswordEncryptor();
         passwordEncryptor.setAlgorithm(ALGORYTHME_CHIFFREMENT);

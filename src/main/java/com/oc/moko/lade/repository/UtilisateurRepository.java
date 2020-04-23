@@ -183,6 +183,6 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, UUID> 
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
-
-	public Boolean selectionUtilisateurParEmail(String emailUtilisateur);
+	
+	Utilisateur findByEmailUtilisateur(String emailUtilisateur);
 }
