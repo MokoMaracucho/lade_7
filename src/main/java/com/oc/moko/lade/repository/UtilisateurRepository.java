@@ -184,5 +184,5 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, UUID> 
 //		return null;
 //	}
 	
-	Utilisateur findByEmailUtilisateur(String emailUtilisateur);
+	Boolean findByEmailUtilisateur(String emailUtilisateur);
 }

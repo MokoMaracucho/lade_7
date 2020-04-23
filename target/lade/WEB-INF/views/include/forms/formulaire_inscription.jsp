@@ -7,25 +7,25 @@
 
 		<div class="form-group">
 	    	<label for="prenomUtilisateur" class="form-label-color">Prénom</label>
-			<div class="small text-warning p-form-warning">${ erreursInscriptionUtilisateur['prenomUtilisateur'] }</div>
+			<div class="small text-warning p-form-warning" value="${ erreursInscriptionUtilisateur['emailUtilisateur'] }"></div>
 			<form:input path="prenomUtilisateur" cssClass="form-control" />
 		</div>
 
 		<div class="form-group">
 	    	<label for="nomUtilisateur" class="form-label-color">Nom</label>
-			<div class="small text-warning p-form-warning">${ erreursInscriptionUtilisateur.erreursInscriptionUtilisateur['nomUtilisateur'] }</div>
+			<div class="small text-warning p-form-warning" value="${ erreursInscriptionUtilisateur['emailUtilisateur'] }"></div>
 			<form:input path="nomUtilisateur" cssClass="form-control" />
 		</div>
 
 		<div class="form-group">
 			<label for="emailUtilisateur" class="text-light">Émail</label>
-		<div class="small text-warning p-form-warning">${ erreursInscriptionUtilisateur['emailUtilisateur'] }</div>
+			<div class="small text-warning p-form-warning" value="${ erreursInscriptionUtilisateur['emailUtilisateur'] }"></div>
 			<form:input path="emailUtilisateur" cssClass="form-control" />
 		</div>
 
 		<div class="form-group">
 			<label for="motDePasseUtilisateur" class="text-light">Mot-de-passe</label>
-		<div class="small text-warning p-form-warning">${ erreursInscriptionUtilisateur['motDePasseUtilisateur'] }</div>
+			<div class="small text-warning p-form-warning" value="${ erreursInscriptionUtilisateur['emailUtilisateur'] }"></div>
 			<form:password path="motDePasseUtilisateur" cssClass="form-control" />
 		</div>
 

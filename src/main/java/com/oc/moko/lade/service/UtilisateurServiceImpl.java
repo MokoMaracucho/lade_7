@@ -1,5 +1,6 @@
 package com.oc.moko.lade.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.oc.moko.lade.entity.Privilege;
 import com.oc.moko.lade.entity.Utilisateur;
 import com.oc.moko.lade.exception.ResourceNotFoundException;
 import com.oc.moko.lade.form.TraitementFormulaireInscription;
@@ -23,6 +25,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		TraitementFormulaireInscription traitementFormulaireInscription = new TraitementFormulaireInscription();
 		Map<String, String> erreursInscriptionUtilisateur = traitementFormulaireInscription.traitementFormulaireInscription(nouvelUtilisateur);
 		if(erreursInscriptionUtilisateur.isEmpty()) {
+			
+			nouvelUtilisateur.setPrivilegeUtilisateur(Privilege.UTILISATEUR);
+			nouvelUtilisateur.setDateInscriptionUtilisateur(new Timestamp(System.currentTimeMillis()));
+			
 			enregistrerUtilisateur(nouvelUtilisateur);
 		}
 		return erreursInscriptionUtilisateur;
