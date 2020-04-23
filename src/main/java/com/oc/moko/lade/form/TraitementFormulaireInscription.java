@@ -14,6 +14,7 @@ import com.oc.moko.lade.service.UtilisateurService;
 
 public class TraitementFormulaireInscription {
 
+	@Autowired
     private UtilisateurService utilisateurService;
 	
 	public static final String CHAMP_PRENOM_UTILISATEUR 						= "prenomUtilisateur";
@@ -127,33 +128,19 @@ public class TraitementFormulaireInscription {
 	private void validationMotDePasse(String motDePasseUtilisateur, String confirmationMotDePasseUtilisateur) throws FormException {
 
 		if (motDePasseUtilisateur != null && motDePasseUtilisateur.trim().length() != 0 && confirmationMotDePasseUtilisateur != null && confirmationMotDePasseUtilisateur.trim().length() != 0 ) {
-
 			if (motDePasseUtilisateur.equals(confirmationMotDePasseUtilisateur)) {
-
 				if (motDePasseUtilisateur.length() >= 8 && motDePasseUtilisateur.length() <= 50) {
-
 					String regex_Minuscule = "[a-z]";
-
 					String regex_Majuscule = "[A-Z]";
-
 					String regex_Chiffre = "[0-9]";
-
 					String regex_Caractere_special = "[- @^_!\"#$%&'()*+,./:;{}<>=|~?]";
-
 					Pattern pattern_Minuscule = Pattern.compile(regex_Minuscule);
-
 					Pattern pattern_Majuscule = Pattern.compile(regex_Majuscule);
-
 					Pattern pattern_Chiffre = Pattern.compile(regex_Chiffre);
-
 					Pattern pattern_Caractere_special = Pattern.compile(regex_Caractere_special);
-
 					Matcher matcher_Minuscule = pattern_Minuscule.matcher(motDePasseUtilisateur);
-
 					Matcher matcher_Majuscule = pattern_Majuscule.matcher(motDePasseUtilisateur);
-
 					Matcher matcher_Chiffre = pattern_Chiffre.matcher(motDePasseUtilisateur);
-
 					Matcher matcher_Caractere_special = pattern_Caractere_special.matcher(motDePasseUtilisateur);
 					if (matcher_Minuscule.find()) {
 						if (matcher_Majuscule.find()) {
