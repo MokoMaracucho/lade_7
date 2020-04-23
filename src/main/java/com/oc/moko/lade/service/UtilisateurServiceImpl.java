@@ -1,6 +1,7 @@
 package com.oc.moko.lade.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +10,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.oc.moko.lade.entity.Utilisateur;
 import com.oc.moko.lade.exception.ResourceNotFoundException;
+import com.oc.moko.lade.form.TraitementFormulaireInscription;
 import com.oc.moko.lade.repository.UtilisateurRepository;
 
 @Service
 public class UtilisateurServiceImpl implements UtilisateurService {
 
-    @Autowired
+	@Autowired
     private UtilisateurRepository utilisateurRepository;
+
+	public Map<String, String> traitementInscriptionUtilisateur(Utilisateur nouvelUtilisateur) {
+		TraitementFormulaireInscription traitementFormulaireInscription = new TraitementFormulaireInscription();
+		Map<String, String> erreursInscriptionUtilisateur = traitementFormulaireInscription.traitementFormulaireInscription(nouvelUtilisateur);
+		if(erreursInscriptionUtilisateur.isEmpty()) {
+			enregistrerUtilisateur(nouvelUtilisateur);
+		}
+		return erreursInscriptionUtilisateur;
+	}
 
 	@Override
     @Transactional
@@ -27,6 +38,16 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     @Transactional
 	public Utilisateur selectionnerUtilisateurParId(UUID idUtilisateur) throws ResourceNotFoundException {
         return utilisateurRepository.findById(idUtilisateur).orElseThrow(() -> new ResourceNotFoundException(idUtilisateur));
+	}
+
+	@Override
+    @Transactional
+	public boolean selectionnerUtilisateurParEmail(String emailUtilisateur) {
+		if(utilisateurRepository.selectionUtilisateurParEmail(emailUtilisateur)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
