@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,13 +43,13 @@ public class UtilisateurController {
     }
 
     @PostMapping("/traitement_inscription_utilisateur")
-    public String traitementInscriptionUtilisateur(@ModelAttribute("nouvelUtilisateur") Utilisateur nouvelUtilisateur, Model model) throws ResourceNotFoundException {
+    public String traitementInscriptionUtilisateur(@ModelAttribute("nouvelUtilisateur") Utilisateur nouvelUtilisateur, ModelMap modelMap) throws ResourceNotFoundException {
     	Map<String, String> erreursInscriptionUtilisateur = utilisateurService.traitementInscriptionUtilisateur(nouvelUtilisateur);
 		if(erreursInscriptionUtilisateur.isEmpty()) {
 	        return "redirect:/utilisateur/liste_utilisateurs";
 		} else {
-			model.addAttribute(ATT_ECHEC_INSCRIPTION_UTILISATEUR, "L'inscription a échouée...");
-			model.addAttribute(ATT_ERREURS_INSCRIPTION_UTILISATEUR, erreursInscriptionUtilisateur);
+			modelMap.addAttribute(ATT_ECHEC_INSCRIPTION_UTILISATEUR, "L'inscription a échouée...");
+			modelMap.addAttribute(ATT_ERREURS_INSCRIPTION_UTILISATEUR, erreursInscriptionUtilisateur);
 	        return "redirect:/utilisateur/inscription_utilisateur";
 		}	
     }

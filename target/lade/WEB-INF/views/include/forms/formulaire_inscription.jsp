@@ -7,13 +7,13 @@
 
 		<div class="form-group">
 	    	<label for="prenomUtilisateur" class="form-label-color">Prénom</label>
-		<div class="small text-warning p-form-warning">${ erreursInscriptionUtilisateur['prenomUtilisateur'] }</div>
+			<div class="small text-warning p-form-warning">${ erreursInscriptionUtilisateur['prenomUtilisateur'] }</div>
 			<form:input path="prenomUtilisateur" cssClass="form-control" />
 		</div>
 
 		<div class="form-group">
 	    	<label for="nomUtilisateur" class="form-label-color">Nom</label>
-		<div class="small text-warning p-form-warning">${ erreursInscriptionUtilisateur['nomUtilisateur'] }</div>
+			<div class="small text-warning p-form-warning">${ erreursInscriptionUtilisateur.erreursInscriptionUtilisateur['nomUtilisateur'] }</div>
 			<form:input path="nomUtilisateur" cssClass="form-control" />
 		</div>
 
