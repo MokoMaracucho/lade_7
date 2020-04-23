@@ -22,9 +22,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	public Map<String, String> traitementInscriptionUtilisateur(Utilisateur nouvelUtilisateur) {
 		TraitementFormulaireInscription traitementFormulaireInscription = new TraitementFormulaireInscription();
 		Map<String, String> erreursInscriptionUtilisateur = traitementFormulaireInscription.traitementFormulaireInscription(nouvelUtilisateur);
-		if(erreursInscriptionUtilisateur.isEmpty()) {
-			enregistrerUtilisateur(nouvelUtilisateur);
-		}
 		return erreursInscriptionUtilisateur;
 	}
 

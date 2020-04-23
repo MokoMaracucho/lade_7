@@ -11,7 +11,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -23,32 +29,40 @@ public class Utilisateur {
 	@NotNull
 	@GeneratedValue(generator="UUID")
 	@GenericGenerator(name="UUID", strategy="org.hibernate.id.UUIDGenerator")
-	@Column(name= "id_utilisateur", updatable=false)
+	@Column(name="id_utilisateur", updatable=false)
 	private UUID idUtilisateur;
 	
-//    @Min(value = 1, message = "Veuillez saisir un prénom valide.")
-//    @Max(value = 30, message = "Veuillez saisir un prénom valide.")
 	@NotNull
+	@NotEmpty
+    @Min(value=1, message="Le prenom est trop court.")
+    @Max(value=30, message="Le prenom est trop long.")
+	@Pattern(regexp="^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ '-]+$", message="Le prénom ne doit ne doit comporter que des lettres")
 	@Column(name="prenom_utilisateur")
 	private String prenomUtilisateur;
 	
-//    @Min(value = 1, message = "Veuillez saisir un nom valide.")
-//    @Max(value = 30, message = "Veuillez saisir un nom valide.")
 	@NotNull
+	@NotEmpty
+    @Min(value=1, message="Le nom est trop court.")
+    @Max(value=30, message="Le nom est trop long.")
+	@Pattern(regexp="^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ '-]+$", message="Le nom ne doit ne doit comporter que des lettres")
 	@Column(name="nom_utilisateur", length=30)
 	private String nomUtilisateur;
 	
-//    @Email(message="Veuillez saisir un email valide.")
 	@NotNull
+	@NotEmpty
+    @Email(message="Veuillez saisir un email valide.")
 	@Column(name="email_utilisateur", length=30, unique=true)
 	private String emailUtilisateur;
 	
-//	@Pattern(regexp = "^[a-zA-Z0-9]{5}", message = "only 5 chars/digits")
 	@NotNull
+	@NotEmpty
+    @Min(value=8, message="Le mot-de-passe est trop court.")
+    @Max(value=30, message="Le mot-de-passe est trop long.")
 	@Column(name="mot_de_passe_utilisateur", length=30)
 	private String motDePasseUtilisateur;
 	
 	@NotNull
+	@NotEmpty
 	@Transient
     private String confirmationMotDePasseUtilisateur;
 
