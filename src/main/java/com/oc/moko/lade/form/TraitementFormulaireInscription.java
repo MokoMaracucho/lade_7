@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.jasypt.util.password.ConfigurablePasswordEncryptor;
-//import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.oc.moko.lade.entity.Utilisateur;
 import com.oc.moko.lade.exception.FormException;
@@ -14,7 +14,7 @@ import com.oc.moko.lade.service.UtilisateurService;
 
 public class TraitementFormulaireInscription {
 
-//	@Autowired
+	@Autowired
     private UtilisateurService utilisateurService;
 	
 	public static final String CHAMP_PRENOM_UTILISATEUR 						= "prenomUtilisateur";
@@ -74,10 +74,18 @@ public class TraitementFormulaireInscription {
 	}
 	
 	private Map<String, String> traitementNom(String nomUtilisateur, Map<String, String> erreursInscriptionUtilisateur) {
+		
+		System.out.println("--------------------------------------------------> traitementNom(String nomUtilisateur, Map<String, String> erreursInscriptionUtilisateur)");
+		
 		try {
 			validationNom(nomUtilisateur);
 		} catch(FormException e) {
+			
+			System.out.println("--------------------------------------------------> X : nomUtilisateur : " + nomUtilisateur + ")");
+			
 			erreursInscriptionUtilisateur.put(CHAMP_NOM_UTILISATEUR, e.getMessage());
+			
+			System.out.println("--------------------------------------------------> X : erreursInscriptionUtilisateur['nomUtilisateur'] : " + erreursInscriptionUtilisateur.get(nomUtilisateur) + ")");
 		}
 		return erreursInscriptionUtilisateur;
 	}
@@ -97,21 +105,45 @@ public class TraitementFormulaireInscription {
 	}
 	
 	private Map<String, String> traitementEmail(String emailUtilisateur, Map<String, String> erreursInscriptionUtilisateur) {
+		
+		System.out.println("--------------------------------------------------> traitementEmail(String emailUtilisateur, Map<String, String> erreursInscriptionUtilisateur)");
+		
 		try {
 			validationEmail(emailUtilisateur);
 		} catch(FormException e) {
+			
+			System.out.println("--------------------------------------------------> X : emailUtilisateur : " + emailUtilisateur + ")");
+			
 			erreursInscriptionUtilisateur.put(CHAMP_EMAIL_UTILISATEUR, e.getMessage());
+			
+			System.out.println("--------------------------------------------------> X : erreursInscriptionUtilisateur['emailUtilisateur'] : " + erreursInscriptionUtilisateur.get(emailUtilisateur) + ")");
 		}
 		return erreursInscriptionUtilisateur;
 	}
 	
 	private void validationEmail(String emailUtilisateur) throws FormException {
         if (emailUtilisateur != null && emailUtilisateur.trim().length() != 0) {
-            if (!emailUtilisateur.matches("^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")) {
-//            	if (utilisateurService.selectionnerUtilisateurParEmail(emailUtilisateur)) {
-//                    throw new FormException("Cette adresse email est déjà utilisée.");
-//                }
-//            } else {
+			
+			System.out.println("--------------------------------------------------> OK 1");
+			
+            if (emailUtilisateur.matches("^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$")) {
+    			
+    			System.out.println("--------------------------------------------------> OK 2");
+    			
+    			Boolean existanceEmailBdd = testerExistanceEmailBdd(emailUtilisateur);
+    			
+    			if(!existanceEmailBdd) {
+    				throw new FormException("Cette adresse email est déà utilisée.");
+    			}
+    			
+    			
+    			
+    			
+    			
+            } else {
+    			
+    			System.out.println("--------------------------------------------------> Le REGEX ne fonctionne pas...");
+    			
                 throw new FormException("L'adresse email n'est pas valide.");
             }
         } else {
@@ -120,10 +152,19 @@ public class TraitementFormulaireInscription {
     }
 	
 	private Map<String, String> traitementMotDePasse(String motDePasseUtilisateur, String confirmationMotDePasseUtilisateur, Map<String, String> erreursInscriptionUtilisateur){
+		
+		System.out.println("--------------------------------------------------> traitementMotDePasse(String motDePasseUtilisateur, Map<String, String> erreursInscriptionUtilisateur)");
+		
 		try {
 			validationMotDePasse(motDePasseUtilisateur, confirmationMotDePasseUtilisateur);
 		} catch(FormException e) {
+			
+			System.out.println("--------------------------------------------------> X : motDePasseUtilisateur : " + motDePasseUtilisateur + ")");
+			System.out.println("--------------------------------------------------> X : confirmationMotDePasseUtilisateur : " + confirmationMotDePasseUtilisateur + ")");
+			
 			erreursInscriptionUtilisateur.put(CHAMP_MOT_DE_PASSE_UTILISATEUR, e.getMessage());
+			
+			System.out.println("--------------------------------------------------> X : erreursInscriptionUtilisateur['motDePasseUtilisateur'] : " + erreursInscriptionUtilisateur.get(motDePasseUtilisateur) + ")");
 		}
 		ConfigurablePasswordEncryptor passwordEncryptor = new ConfigurablePasswordEncryptor();
         passwordEncryptor.setAlgorithm(ALGORYTHME_CHIFFREMENT);
@@ -177,5 +218,19 @@ public class TraitementFormulaireInscription {
 		} else {
 			throw new FormException("Veuillez renseigner un mot-de-passe et le confirmer.");
 		}
+	}
+	
+	public Boolean testerExistanceEmailBdd(String emailUtilisateur) throws FormException {
+		Boolean existanceEmailBdd;
+		Utilisateur utilisateur = null;
+		try {
+			utilisateur = utilisateurService.selectionnerUtilisateurParEmail(emailUtilisateur);
+			existanceEmailBdd = false;
+		} catch(Exception e) {
+
+		} finally {
+			existanceEmailBdd = true;
+		}
+		return existanceEmailBdd;
 	}
 }

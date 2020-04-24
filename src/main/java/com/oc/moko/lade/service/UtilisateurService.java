@@ -2,6 +2,7 @@ package com.oc.moko.lade.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import com.oc.moko.lade.entity.Utilisateur;
@@ -15,7 +16,7 @@ public interface UtilisateurService {
 
     public Utilisateur selectionnerUtilisateurParId(UUID idUtilisateur) throws ResourceNotFoundException;
     
-    public Boolean selectionnerUtilisateurParEmail(String emailUtilisateur);
+    public Utilisateur selectionnerUtilisateurParEmail(String emailUtilisateur);
 
     public List<Utilisateur> listeUtilisateurs();
 

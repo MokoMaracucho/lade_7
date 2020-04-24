@@ -40,10 +40,10 @@ public class Utilisateur {
 	
 //    @Email(message="Veuillez saisir un email valide.")
 	@NotNull
-	@Column(name="email_utilisateur", length=30, unique=true)
+	@Column(name="email_utilisateur", length=30)
 	private String emailUtilisateur;
 	
-//	@Pattern(regexp = "^[a-zA-Z0-9]{5}", message = "only 5 chars/digits")
+//	  @Pattern(regexp = "^[a-zA-Z0-9]{5}", message = "only 5 chars/digits")
 	@NotNull
 	@Column(name="mot_de_passe_utilisateur", length=30)
 	private String motDePasseUtilisateur;

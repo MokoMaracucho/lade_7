@@ -48,12 +48,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
 	@Override
     @Transactional
-	public Boolean selectionnerUtilisateurParEmail(String emailUtilisateur) {
-		if(utilisateurRepository.findByEmailUtilisateur(emailUtilisateur) != null) {
-			return true;
-		} else {
-			return false;
-		}
+	public Utilisateur selectionnerUtilisateurParEmail(String emailUtilisateur) {
+		System.out.println("--------------------------------------------------> utilisateurRepository.findByEmailUtilisateur(emailUtilisateur) : " + utilisateurRepository.findByEmailUtilisateur(emailUtilisateur));
+		Utilisateur utilisateur = utilisateurRepository.findByEmailUtilisateur(emailUtilisateur);
+		return utilisateur;
 	}
 
 	@Override
