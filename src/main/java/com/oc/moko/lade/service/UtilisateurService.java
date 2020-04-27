@@ -10,13 +10,11 @@ import com.oc.moko.lade.exception.ResourceNotFoundException;
 
 public interface UtilisateurService {
     
-    public Map<String, String> traitementInscriptionUtilisateur(Utilisateur nouvelUtilisateur);
-
     public void enregistrerUtilisateur(Utilisateur utilisateur);
 
     public Utilisateur selectionnerUtilisateurParId(UUID idUtilisateur) throws ResourceNotFoundException;
     
-    public Utilisateur selectionnerUtilisateurParEmail(String emailUtilisateur);
+//    public Utilisateur selectionnerUtilisateurParEmail(String emailUtilisateur);
 
     public List<Utilisateur> listeUtilisateurs();
 

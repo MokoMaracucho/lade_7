@@ -11,7 +11,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+//import javax.validation.Constraint;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+//import javax.validation.constraints.Max;
+//import javax.valsidation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+//import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+//import com.oc.mosko.lade.form.ValidPassword;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -26,39 +38,44 @@ public class Utilisateur {
 	@Column(name= "id_utilisateur", updatable=false)
 	private UUID idUtilisateur;
 	
-//    @Min(value = 1, message = "Veuillez saisir un prénom valide.")
-//    @Max(value = 30, message = "Veuillez saisir un prénom valide.")
 	@NotNull
-	@Column(name="prenom_utilisateur")
+	@NotEmpty(message="Veuillez renseigner un prénom.")
+	@Min(value = 2, message = "Le prénom est trop court.")
+	@Max(value = 30, message = "Le prénom est trop long.")
+	@Column(name="prenom_utilisateur", length=30)
 	private String prenomUtilisateur;
 	
-//    @Min(value = 1, message = "Veuillez saisir un nom valide.")
-//    @Max(value = 30, message = "Veuillez saisir un nom valide.")
-	@NotNull
-	@Column(name="nom_utilisateur", length=30)
+//	@NotNull
+//	@NotEmpty(message="Veuillez renseigner un nom.")
+//	@Min(value = 2, message = "Le nom est trop court.")
+//	@Max(value = 30, message = "Le nom est trop long.")
+//	@Column(name="nom_utilisateur", length=30)
 	private String nomUtilisateur;
 	
-//    @Email(message="Veuillez saisir un email valide.")
-	@NotNull
-	@Column(name="email_utilisateur", length=30)
+//	@NotNull
+//	@NotEmpty(message="Veuillez renseigner un email.")
+//	@Email(message="Veuillez saisir un email valide.")
+//	@Column(name="email_utilisateur", length=60)
 	private String emailUtilisateur;
 	
-//	  @Pattern(regexp = "^[a-zA-Z0-9]{5}", message = "only 5 chars/digits")
-	@NotNull
-	@Column(name="mot_de_passe_utilisateur", length=30)
+//	@NotNull
+//	@NotEmpty(message="Veuillez renseigner un mot-de-passe.")
+//	@Pattern(regexp = "^[a-zA-Z0-9- @^_!\\\\\\\"#$%&'()*+,.:;{}<>=|~?]{30}$", message = "Le mot de passe n'est pas valide.")
+//	@Column(name="mot_de_passe_utilisateur", length=56)
 	private String motDePasseUtilisateur;
 	
-	@NotNull
-	@Transient
+//	@NotNull
+//	@Transient
+//	@NotEmpty(message="Veuillez confirmer le mot-de-passe.")
     private String confirmationMotDePasseUtilisateur;
 
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	@Column(name="privilege_utilisateur", length=30)
+//	@NotNull
+//	@Enumerated(EnumType.STRING)
+//	@Column(name="privilege_utilisateur", length=17)
 	private Privilege privilegeUtilisateur;
 	
-	@NotNull
-	@Column(name="date_inscription_utilisateur")
+//	@NotNull
+//	@Column(name="date_inscription_utilisateur")
 	private Timestamp dateInscriptionUtilisateur;
 	
 	public Utilisateur() {
@@ -126,5 +143,14 @@ public class Utilisateur {
 
 	public void setDateInscriptionUtilisateur(Timestamp dateInscriptionUtilisateur) {
 		this.dateInscriptionUtilisateur = dateInscriptionUtilisateur;
+	}
+
+	@Override
+	public String toString() {
+		return "Utilisateur [idUtilisateur=" + idUtilisateur + ", prenomUtilisateur=" + prenomUtilisateur
+				+ ", nomUtilisateur=" + nomUtilisateur + ", emailUtilisateur=" + emailUtilisateur
+				+ ", motDePasseUtilisateur=" + motDePasseUtilisateur + ", confirmationMotDePasseUtilisateur="
+				+ confirmationMotDePasseUtilisateur + ", privilegeUtilisateur=" + privilegeUtilisateur
+				+ ", dateInscriptionUtilisateur=" + dateInscriptionUtilisateur + "]";
 	}
 }
