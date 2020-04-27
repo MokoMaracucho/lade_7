@@ -2,7 +2,6 @@ package com.oc.moko.lade.service;
 
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.oc.moko.lade.entity.Privilege;
 import com.oc.moko.lade.entity.Utilisateur;
 import com.oc.moko.lade.exception.ResourceNotFoundException;
-import com.oc.moko.lade.form.TraitementFormulaireInscription;
 import com.oc.moko.lade.repository.UtilisateurRepository;
 
 @Service
@@ -21,22 +19,11 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	@Autowired
     private UtilisateurRepository utilisateurRepository;
 
-	public Map<String, String> traitementInscriptionUtilisateur(Utilisateur nouvelUtilisateur) {
-		TraitementFormulaireInscription traitementFormulaireInscription = new TraitementFormulaireInscription();
-		Map<String, String> erreursInscriptionUtilisateur = traitementFormulaireInscription.traitementFormulaireInscription(nouvelUtilisateur);
-		if(erreursInscriptionUtilisateur.isEmpty()) {
-			
-			nouvelUtilisateur.setPrivilegeUtilisateur(Privilege.UTILISATEUR);
-			nouvelUtilisateur.setDateInscriptionUtilisateur(new Timestamp(System.currentTimeMillis()));
-			
-			enregistrerUtilisateur(nouvelUtilisateur);
-		}
-		return erreursInscriptionUtilisateur;
-	}
-
 	@Override
     @Transactional
 	public void enregistrerUtilisateur(Utilisateur utilisateur) {
+		utilisateur.setPrivilegeUtilisateur(Privilege.UTILISATEUR);
+		utilisateur.setDateInscriptionUtilisateur(new Timestamp(System.currentTimeMillis()));
 		utilisateurRepository.save(utilisateur);
 	}
 
@@ -46,13 +33,13 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         return utilisateurRepository.findById(idUtilisateur).orElseThrow(() -> new ResourceNotFoundException(idUtilisateur));
 	}
 
-	@Override
-    @Transactional
-	public Utilisateur selectionnerUtilisateurParEmail(String emailUtilisateur) {
-		System.out.println("--------------------------------------------------> utilisateurRepository.findByEmailUtilisateur(emailUtilisateur) : " + utilisateurRepository.findByEmailUtilisateur(emailUtilisateur));
-		Utilisateur utilisateur = utilisateurRepository.findByEmailUtilisateur(emailUtilisateur);
-		return utilisateur;
-	}
+//	@Override
+//    @Transactional
+//	public Utilisateur selectionnerUtilisateurParEmail(String emailUtilisateur) {
+//		System.out.println("--------------------------------------------------> utilisateurRepository.findByEmailUtilisateur(emailUtilisateur) : " + utilisateurRepository.findByEmailUtilisateur(emailUtilisateur));
+//		Utilisateur utilisateur = utilisateurRepository.findByEmailUtilisateur(emailUtilisateur);
+//		return utilisateur;
+//	}
 
 	@Override
     @Transactional
