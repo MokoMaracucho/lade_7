@@ -51,10 +51,11 @@ public class UtilisateurController {
     }
 
     @PostMapping("/traitement_inscription_utilisateur")
-    public String traitementInscriptionUtilisateur(@Valid @ModelAttribute("nouvelUtilisateur") Utilisateur nouvelUtilisateur, BindingResult bindingResult) throws ResourceNotFoundException {
+    public String traitementInscriptionUtilisateur(@Valid @ModelAttribute("nouvelUtilisateur") Utilisateur nouvelUtilisateur, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 	        return "inscription_utilisateur";
 		} else {
+			utilisateurService.enregistrerUtilisateur(nouvelUtilisateur);
 	        return "redirect:/utilisateur/liste_utilisateurs";
 		}	
     }

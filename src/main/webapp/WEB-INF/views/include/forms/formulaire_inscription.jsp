@@ -30,6 +30,7 @@
 		</div>
 
 		<div class="form-group">
+			<label for="confirmationMotDePasseUtilisateur" class="text-light">Confirmation mot-de-passe</label>
 			<form:errors path="confirmationMotDePasseUtilisateur" cssClass="small text-warning p-form-warning" />
 			<form:password path="confirmationMotDePasseUtilisateur" cssClass="form-control" />
 		</div>
